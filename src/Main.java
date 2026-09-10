@@ -1,9 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+
+        ArrayList<Ticket> tickets = new ArrayList<>();
 
         showWelcomeMessage();
 
@@ -27,25 +30,39 @@ public class Main {
 
                 String priority;
 
-                while (true){
+                while (true) {
                     System.out.print("Enter priority (Low/Medium/High): ");
                     priority = scanner.nextLine();
 
                     if (priority.equalsIgnoreCase("Low") || priority.equalsIgnoreCase("Medium")
-                                                                     || priority.equalsIgnoreCase("High"))
-                    {
+                            || priority.equalsIgnoreCase("High")) {
                         break;
                     }
                     System.out.println("Invalid priority. Please enter Low, Medium, or High");
                 }
 
                 Ticket ticket = new Ticket(name, issue, priority);
+                tickets.add(ticket);
+
+                System.out.println("Ticket created successfully!");
                 ticket.display();
+
             } else if (choice == 2) {
+                if (tickets.isEmpty()) {
+                    System.out.println("No tickets have been created.");
+                } else {
+                    System.out.println("\n--- ALL TICKETS ---");
+
+                    // Display every ticket sorted in the list
+                    for (Ticket ticket : tickets) {
+                        ticket.display();
+                    }
+                }
+            } else if (choice == 3) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
-                System.out.println("Invalid option");
+                System.out.println("Invalid option.");
             }
 
 
@@ -64,8 +81,9 @@ public class Main {
     }
 
     public static void showMenu() {
-        System.out.println("1. Create a ticket");
-        System.out.println("2. Exit");
+        System.out.println("\n1. Create a ticket");
+        System.out.println("2. View all tickets");
+        System.out.println("3. Exit");
 
     }
 
