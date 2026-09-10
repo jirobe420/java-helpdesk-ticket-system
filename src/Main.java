@@ -25,10 +25,22 @@ public class Main {
                 System.out.print("Describe your issue: ");
                 String issue = scanner.nextLine();
 
-                System.out.print("Enter priority (Low/Medium/High): ");
-                String priority = scanner.nextLine();
+                String priority;
 
-                displayTicket(name, issue, priority);
+                while (true){
+                    System.out.print("Enter priority (Low/Medium/High): ");
+                    priority = scanner.nextLine();
+
+                    if (priority.equalsIgnoreCase("Low") || priority.equalsIgnoreCase("Medium")
+                                                                     || priority.equalsIgnoreCase("High"))
+                    {
+                        break;
+                    }
+                    System.out.println("Invalid priority. Please enter Low, Medium, or High");
+                }
+
+                Ticket ticket = new Ticket(name, issue, priority);
+                ticket.display();
             } else if (choice == 2) {
                 running = false;
                 System.out.println("Goodbye!");
@@ -57,11 +69,4 @@ public class Main {
 
     }
 
-    public static void displayTicket(String name, String issue, String priority) {
-        System.out.println("\n-- TICKET DETAILS ---");
-        System.out.println("User: " + name);
-        System.out.println("Issue: " + issue);
-        System.out.println("Priority: " + priority);
-        System.out.println("-----------------------");
-    }
 }
