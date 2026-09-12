@@ -58,7 +58,28 @@ public class Main {
                         ticket.display();
                     }
                 }
+
+
             } else if (choice == 3) {
+                System.out.print("Enter the ticket ID to close: ");
+                int idToClose = scanner.nextInt();
+                scanner.nextLine();
+
+                boolean found = false;
+
+                for (Ticket ticket : tickets) {
+                    if (ticket.getId() == idToClose) {
+                        ticket.close();
+                        found = true;
+                        System.out.println("Ticket " + idToClose + " closed successfully.");
+                        break;
+                    }
+                }
+                if (!found) {
+                    System.out.println("Ticket ID not found.");
+                }
+
+            } else if (choice == 4) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
@@ -83,7 +104,8 @@ public class Main {
     public static void showMenu() {
         System.out.println("\n1. Create a ticket");
         System.out.println("2. View all tickets");
-        System.out.println("3. Exit");
+        System.out.println("3. Close a ticket");
+        System.out.println("4. Exit");
 
     }
 

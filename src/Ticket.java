@@ -1,11 +1,22 @@
 
 public class Ticket {
 
+    private String status;
+
+    private static int nextId = 1;
+    private int id;
+
     private String name;
     private String issue;
     private String priority;
 
     public Ticket(String name, String issue, String priority) {
+
+        this.status = "Open";
+        this.id = nextId;
+        nextId++;
+
+
         this.name = name;
         this.issue = issue;
 
@@ -15,11 +26,23 @@ public class Ticket {
 
     }
 
+    public int getId()
+    {
+        return id;
+    }
+
+    public void close()
+    {
+        status = "Closed";
+    }
+
     public void display() {
         System.out.println("\n--- TICKET DETAILS ---");
+        System.out.println("Ticket ID: " + id);
         System.out.println("User: " + name);
         System.out.println("Issue: " + issue);
         System.out.println("Priority: " + priority);
+        System.out.println("Status: " + status);
         System.out.println("----------------------");
     }
 
