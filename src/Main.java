@@ -18,15 +18,19 @@ public class Main {
 
 
             System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(scanner.nextLine()); // Reads input and tries to convert it into an integer
+            }catch (NumberFormatException e){
+                System.out.println("Invalid input. Please enter a number");
+                continue;
+            }
 
             if (choice == 1) {
-                System.out.print("Enter your name: ");
-                String name = scanner.nextLine();
+                String name = readNonEmptyLine(scanner, "Enter your name: ");
 
-                System.out.print("Describe your issue: ");
-                String issue = scanner.nextLine();
+                String issue = readNonEmptyLine(scanner, "Describe your issue: ");
 
                 String priority;
 
@@ -62,8 +66,15 @@ public class Main {
 
             } else if (choice == 3) {
                 System.out.print("Enter the ticket ID to close: ");
-                int idToClose = scanner.nextInt();
-                scanner.nextLine();
+                int idToClose;
+                // if the user types hello instead of a number, the program will show an error
+                // and return to the menu instead of crashing.
+                try{
+                    idToClose = Integer.parseInt(scanner.nextLine());
+                }catch (NumberFormatException e){
+                    System.out.println("Invalid ID. Please enter a number.");
+                    continue;
+                }
 
                 boolean found = false;
 
@@ -107,6 +118,24 @@ public class Main {
         System.out.println("3. Close a ticket");
         System.out.println("4. Exit");
 
+
+    }
+
+    public static String readNonEmptyLine(Scanner scanner, String message)
+    {
+        while (true)
+        {
+            System.out.print(message);
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty())
+            {
+                return input;
+            }
+
+            System.out.println("This field cannot be empty.");
+
+
+        }
     }
 
 }
