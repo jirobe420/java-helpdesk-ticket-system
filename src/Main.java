@@ -1,12 +1,11 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Ticket> tickets = new ArrayList<>();
+        TicketManager ticketManager = new TicketManager();
 
         showWelcomeMessage();
 
@@ -22,7 +21,7 @@ public class Main {
 
             try {
                 choice = Integer.parseInt(scanner.nextLine()); // Reads input and tries to convert it into an integer
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number");
                 continue;
             }
@@ -46,45 +45,26 @@ public class Main {
                 }
 
                 Ticket ticket = new Ticket(name, issue, priority);
-                tickets.add(ticket);
+                ticketManager.addTicket(ticket);
 
                 System.out.println("Ticket created successfully!");
                 ticket.display();
 
             } else if (choice == 2) {
-                if (tickets.isEmpty()) {
-                    System.out.println("No tickets have been created.");
-                } else {
-                    System.out.println("\n--- ALL TICKETS ---");
-
-                    // Display every ticket sorted in the list
-                    for (Ticket ticket : tickets) {
-                        ticket.display();
-                    }
-                }
-
-
+                ticketManager.displayAllTickets();
             } else if (choice == 3) {
                 System.out.print("Enter the ticket ID to close: ");
                 int idToClose;
                 // if the user types hello instead of a number, the program will show an error
                 // and return to the menu instead of crashing.
-                try{
+                try {
                     idToClose = Integer.parseInt(scanner.nextLine());
-                }catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     System.out.println("Invalid ID. Please enter a number.");
                     continue;
                 }
 
-             Ticket ticketToClose = findTicketById(tickets, idToClose);
-
-             if (ticketToClose == null){
-                 System.out.println("Ticket ID not found.");
-             }else if (ticketToClose.close()){
-                 System.out.println("Ticket " + idToClose + " closed successfully.");
-             }else{
-                 System.out.println("Ticket " + idToClose + " is already closed.");
-             }
+                ticketManager.closeTicket(idToClose);
 
 
             } else if (choice == 4) {
@@ -118,14 +98,11 @@ public class Main {
 
     }
 
-    public static String readNonEmptyLine(Scanner scanner, String message)
-    {
-        while (true)
-        {
+    public static String readNonEmptyLine(Scanner scanner, String message) {
+        while (true) {
             System.out.print(message);
             String input = scanner.nextLine().trim();
-            if (!input.isEmpty())
-            {
+            if (!input.isEmpty()) {
                 return input;
             }
 
@@ -135,16 +112,5 @@ public class Main {
         }
     }
 
-    public static Ticket findTicketById(ArrayList<Ticket> tickets, int id)
-    {
-        for (Ticket ticket : tickets)
-        {
-            if (ticket.getId() == id)
-            {
-                return ticket;
-            }
-        }
-        return null;
-    }
 
 }
