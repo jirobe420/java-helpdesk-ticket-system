@@ -76,19 +76,16 @@ public class Main {
                     continue;
                 }
 
-                boolean found = false;
+             Ticket ticketToClose = findTicketById(tickets, idToClose);
 
-                for (Ticket ticket : tickets) {
-                    if (ticket.getId() == idToClose) {
-                        ticket.close();
-                        found = true;
-                        System.out.println("Ticket " + idToClose + " closed successfully.");
-                        break;
-                    }
-                }
-                if (!found) {
-                    System.out.println("Ticket ID not found.");
-                }
+             if (ticketToClose == null){
+                 System.out.println("Ticket ID not found.");
+             }else if (ticketToClose.close()){
+                 System.out.println("Ticket " + idToClose + " closed successfully.");
+             }else{
+                 System.out.println("Ticket " + idToClose + " is already closed.");
+             }
+
 
             } else if (choice == 4) {
                 running = false;
@@ -136,6 +133,18 @@ public class Main {
 
 
         }
+    }
+
+    public static Ticket findTicketById(ArrayList<Ticket> tickets, int id)
+    {
+        for (Ticket ticket : tickets)
+        {
+            if (ticket.getId() == id)
+            {
+                return ticket;
+            }
+        }
+        return null;
     }
 
 }

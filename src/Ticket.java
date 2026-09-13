@@ -31,9 +31,14 @@ public class Ticket {
         return id;
     }
 
-    public void close()
+    public boolean close()
     {
-        status = "Closed";
+       if (status.equals("Closed"))
+       {
+           return false;
+       }
+       status = "Closed";
+       return true;
     }
 
     public void display() {
