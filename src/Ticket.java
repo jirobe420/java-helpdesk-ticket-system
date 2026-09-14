@@ -31,6 +31,11 @@ public class Ticket {
         return id;
     }
 
+    public String toFileString()
+    {
+        return id + "|" + name + "|" + issue + "|" + priority + "|" + status;
+    }
+
     public boolean close()
     {
        if (status.equals("Closed"))
