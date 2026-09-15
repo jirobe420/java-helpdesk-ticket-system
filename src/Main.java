@@ -65,19 +65,48 @@ public class Main {
                 }
 
                 ticketManager.closeTicket(idToClose);
-            }else if( choice == 4)
-            {
+            } else if (choice == 4) {
                 System.out.println("Enter the ticket ID to search: ");
 
                 try {
                     int idToSearch = Integer.parseInt(scanner.nextLine());
                     ticketManager.displayTicketById(idToSearch);
-                }catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     System.out.println("Invalid ID. Please enter a number.");
                 }
 
             } else if (choice == 5) {
+                System.out.println("\n1. View open tickets");
+                System.out.println("2. View closed tickets");
+                System.out.println("3. Filter by priority");
+                System.out.println("Choose a filter: ");
+
+                String filterChoice = scanner.nextLine();
+
+                if (filterChoice.equals("1")) {
+                    ticketManager.displayTicketByStatus("Open");
+
+                } else if (filterChoice.equals("2")) {
+                    ticketManager.displayTicketByStatus("Closed");
+
+                } else if (filterChoice.equals("3")) {
+                    System.out.println("Enter priority (Low/Meidum/High): ");
+                    String priority = scanner.nextLine();
+
+                    if (priority.equalsIgnoreCase("Low")
+                            || priority.equalsIgnoreCase("Medium")
+                            || priority.equalsIgnoreCase("High")) {
+
+                        ticketManager.displayTicketsByPriority(priority);
+                    } else {
+                        System.out.println("Invalid priority.");
+                    }
+
+                } else {
+                    System.out.println("Invalid filter option.");
+                }
+
+            } else if (choice == 6) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
@@ -104,7 +133,8 @@ public class Main {
         System.out.println("2. View all tickets");
         System.out.println("3. Close a ticket");
         System.out.println("4. Search for a ticket");
-        System.out.println("5. Exit");
+        System.out.println("5. Filter tickets");
+        System.out.println("6. Exit");
 
 
     }

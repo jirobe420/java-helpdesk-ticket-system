@@ -70,4 +70,14 @@ public class Ticket {
         }
     }
 
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public String getPriority()
+    {
+        return priority;
+    }
+
 }

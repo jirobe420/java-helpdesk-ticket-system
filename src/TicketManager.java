@@ -10,8 +10,7 @@ public class TicketManager {
 
     private ArrayList<Ticket> tickets = new ArrayList<>();
 
-    public TicketManager()
-    {
+    public TicketManager() {
         loadTicketsFromFile();
     }
 
@@ -46,14 +45,12 @@ public class TicketManager {
         }
     }
 
-    public void displayTicketById(int id)
-    {
+    public void displayTicketById(int id) {
         Ticket ticket = findTicketById(id);
 
-        if (ticket == null)
-        {
+        if (ticket == null) {
             System.out.println("Ticket ID not found.");
-        }else{
+        } else {
             ticket.display();
         }
     }
@@ -80,21 +77,17 @@ public class TicketManager {
 
     }
 
-    private void loadTicketsFromFile()
-    {
+    private void loadTicketsFromFile() {
         File file = new File("tickets.txt");
 
-        if (!file.exists())
-        {
+        if (!file.exists()) {
             return;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file)))
-        {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
 
-            while ((line = reader.readLine()) != null)
-            {
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
 
                 int id = Integer.parseInt(parts[0]);
@@ -103,17 +96,68 @@ public class TicketManager {
                 String priority = parts[3];
                 String status = parts[4];
 
-                Ticket ticket = new Ticket(id, name ,issue, priority, status);
+                Ticket ticket = new Ticket(id, name, issue, priority, status);
 
                 tickets.add(ticket);
             }
 
-        }catch (IOException | NumberFormatException e)
-        {
+        } catch (IOException | NumberFormatException e) {
             System.out.println("Could not load tickets from file");
         }
 
 
     }
+
+    public void displayTicketByStatus(String status)
+    {
+        boolean found = false;
+
+        for (Ticket ticket : tickets)
+        {
+            if (ticket.getStatus().equalsIgnoreCase(status))
+            {
+                ticket.display();
+                found = true;
+            }
+        }
+
+        if(!found)
+        {
+            System.out.println("No " + status + " ticket found.");
+        }
+
+    }
+
+    public void displayTicketsByPriority(String priority)
+    {
+        boolean found = false;
+
+        for (Ticket ticket : tickets)
+        {
+            if (ticket.getPriority().equalsIgnoreCase(priority))
+            {
+                ticket.display();
+                found = true;
+            }
+        }
+
+        if(!found)
+        {
+            System.out.println("No " + priority + " priority tickets found.");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
