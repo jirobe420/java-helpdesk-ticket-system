@@ -46,6 +46,18 @@ public class TicketManager {
         }
     }
 
+    public void displayTicketById(int id)
+    {
+        Ticket ticket = findTicketById(id);
+
+        if (ticket == null)
+        {
+            System.out.println("Ticket ID not found.");
+        }else{
+            ticket.display();
+        }
+    }
+
     private Ticket findTicketById(int id) {
         for (Ticket ticket : tickets) {
             if (ticket.getId() == id) {

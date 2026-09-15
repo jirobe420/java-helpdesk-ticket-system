@@ -65,9 +65,19 @@ public class Main {
                 }
 
                 ticketManager.closeTicket(idToClose);
+            }else if( choice == 4)
+            {
+                System.out.println("Enter the ticket ID to search: ");
 
+                try {
+                    int idToSearch = Integer.parseInt(scanner.nextLine());
+                    ticketManager.displayTicketById(idToSearch);
+                }catch (NumberFormatException e)
+                {
+                    System.out.println("Invalid ID. Please enter a number.");
+                }
 
-            } else if (choice == 4) {
+            } else if (choice == 5) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
@@ -93,7 +103,8 @@ public class Main {
         System.out.println("\n1. Create a ticket");
         System.out.println("2. View all tickets");
         System.out.println("3. Close a ticket");
-        System.out.println("4. Exit");
+        System.out.println("4. Search for a ticket");
+        System.out.println("5. Exit");
 
 
     }
