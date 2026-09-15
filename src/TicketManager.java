@@ -45,6 +45,20 @@ public class TicketManager {
         }
     }
 
+    public void deleteTicket(int id)
+    {
+        Ticket ticket = findTicketById(id);
+
+        if (ticket == null)
+        {
+            System.out.println("Ticket ID not found.");
+        }else {
+            tickets.remove(ticket);
+            saveTicketsToFile();
+            System.out.println("Ticket " + id + " deleted successfully");
+        }
+    }
+
     public void displayTicketById(int id) {
         Ticket ticket = findTicketById(id);
 

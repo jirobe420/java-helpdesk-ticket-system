@@ -107,6 +107,25 @@ public class Main {
                 }
 
             } else if (choice == 6) {
+                System.out.print("Enter the ticket ID to delete: ");
+
+                try {
+                    int idToDelete = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Are you sure? (yes/no): ");
+                    String confirmation = scanner.nextLine();
+
+                    if (confirmation.equalsIgnoreCase("yes")) {
+                        ticketManager.deleteTicket((idToDelete));
+                    } else {
+                        System.out.println("Deletion cancelled.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid ID. Please enter a number.");
+                }
+
+
+            } else if (choice == 7) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
@@ -134,7 +153,8 @@ public class Main {
         System.out.println("3. Close a ticket");
         System.out.println("4. Search for a ticket");
         System.out.println("5. Filter tickets");
-        System.out.println("6. Exit");
+        System.out.println("6. Delete a ticket");
+        System.out.println("7. Exit");
 
 
     }
