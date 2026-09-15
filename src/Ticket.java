@@ -56,4 +56,18 @@ public class Ticket {
         System.out.println("----------------------");
     }
 
+    public Ticket(int id, String name, String issue, String priority, String status)
+    {
+        this.id = id;
+        this.name = name;
+        this.issue = issue;
+        this.priority = priority;
+        this.status = status;
+
+        if (id >= nextId)
+        {
+            nextId = id + 1;
+        }
+    }
+
 }

@@ -2,10 +2,18 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 public class TicketManager {
 
     private ArrayList<Ticket> tickets = new ArrayList<>();
+
+    public TicketManager()
+    {
+        loadTicketsFromFile();
+    }
 
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);
@@ -55,6 +63,42 @@ public class TicketManager {
             }
         } catch (IOException e) {
             System.out.println("Could not save tickets to file.");
+        }
+
+
+    }
+
+    private void loadTicketsFromFile()
+    {
+        File file = new File("tickets.txt");
+
+        if (!file.exists())
+        {
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file)))
+        {
+            String line;
+
+            while ((line = reader.readLine()) != null)
+            {
+                String[] parts = line.split("\\|");
+
+                int id = Integer.parseInt(parts[0]);
+                String name = parts[1];
+                String issue = parts[2];
+                String priority = parts[3];
+                String status = parts[4];
+
+                Ticket ticket = new Ticket(id, name ,issue, priority, status);
+
+                tickets.add(ticket);
+            }
+
+        }catch (IOException | NumberFormatException e)
+        {
+            System.out.println("Could not load tickets from file");
         }
 
 
