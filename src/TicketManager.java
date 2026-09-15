@@ -1,15 +1,12 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 
 public class TicketManager {
 
-    private ArrayList<Ticket> tickets = new ArrayList<>();
+    private final ArrayList<Ticket> tickets = new ArrayList<>();
 
+
+    // Load previously saved tickets when the manager is created
     public TicketManager() {
         loadTicketsFromFile();
     }
@@ -45,14 +42,12 @@ public class TicketManager {
         }
     }
 
-    public void deleteTicket(int id)
-    {
+    public void deleteTicket(int id) {
         Ticket ticket = findTicketById(id);
 
-        if (ticket == null)
-        {
+        if (ticket == null) {
             System.out.println("Ticket ID not found.");
-        }else {
+        } else {
             tickets.remove(ticket);
             saveTicketsToFile();
             System.out.println("Ticket " + id + " deleted successfully");
@@ -69,8 +64,13 @@ public class TicketManager {
         }
     }
 
+
+    // Returns the ticket with the matching ID, or null if it does not exist.
     private Ticket findTicketById(int id) {
+
+        // check each ticket object inside the tickets list.
         for (Ticket ticket : tickets) {
+
             if (ticket.getId() == id) {
                 return ticket;
             }
@@ -80,6 +80,8 @@ public class TicketManager {
     }
 
     private void saveTicketsToFile() {
+
+        // Replace tickets.txt with the current contents of the ticket list
         try (PrintWriter writer = new PrintWriter(new FileWriter("tickets.txt"))) {
             for (Ticket ticket : tickets) {
                 writer.println(ticket.toFileString());
@@ -91,6 +93,8 @@ public class TicketManager {
 
     }
 
+
+    // Read saved tickets and recreate the Ticket objects.
     private void loadTicketsFromFile() {
         File file = new File("tickets.txt");
 
@@ -103,6 +107,10 @@ public class TicketManager {
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
+
+                if (parts.length != 5) {
+                    continue;
+                }
 
                 int id = Integer.parseInt(parts[0]);
                 String name = parts[1];
@@ -122,56 +130,37 @@ public class TicketManager {
 
     }
 
-    public void displayTicketByStatus(String status)
-    {
+    public void displayTicketByStatus(String status) {
         boolean found = false;
 
-        for (Ticket ticket : tickets)
-        {
-            if (ticket.getStatus().equalsIgnoreCase(status))
-            {
+        for (Ticket ticket : tickets) {
+            if (ticket.getStatus().equalsIgnoreCase(status)) {
                 ticket.display();
                 found = true;
             }
         }
 
-        if(!found)
-        {
+        if (!found) {
             System.out.println("No " + status + " ticket found.");
         }
 
     }
 
-    public void displayTicketsByPriority(String priority)
-    {
+    public void displayTicketsByPriority(String priority) {
         boolean found = false;
 
-        for (Ticket ticket : tickets)
-        {
-            if (ticket.getPriority().equalsIgnoreCase(priority))
-            {
+        for (Ticket ticket : tickets) {
+            if (ticket.getPriority().equalsIgnoreCase(priority)) {
                 ticket.display();
                 found = true;
             }
         }
 
-        if(!found)
-        {
+        if (!found) {
             System.out.println("No " + priority + " priority tickets found.");
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

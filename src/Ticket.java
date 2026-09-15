@@ -1,14 +1,15 @@
 
 public class Ticket {
 
-    private String status;
-
+    // counter used to give each new ticket a unique ID,
+    //Ex: First ticket uses ID 1, nextId becomes 2 , Second ticket uses ID 2 and etc...
     private static int nextId = 1;
-    private int id;
 
+    private int id;
     private String name;
     private String issue;
     private String priority;
+    private String status;
 
     public Ticket(String name, String issue, String priority) {
 
@@ -26,24 +27,22 @@ public class Ticket {
 
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public String toFileString()
-    {
+
+    // Converts the ticket into the format stored in tickets.txt
+    public String toFileString() {
         return id + "|" + name + "|" + issue + "|" + priority + "|" + status;
     }
 
-    public boolean close()
-    {
-       if (status.equals("Closed"))
-       {
-           return false;
-       }
-       status = "Closed";
-       return true;
+    public boolean close() {
+        if (status.equals("Closed")) {
+            return false;
+        }
+        status = "Closed";
+        return true;
     }
 
     public void display() {
@@ -56,27 +55,25 @@ public class Ticket {
         System.out.println("----------------------");
     }
 
-    public Ticket(int id, String name, String issue, String priority, String status)
-    {
+    // Recreates an existing ticket loaded from tickets.txt
+    public Ticket(int id, String name, String issue, String priority, String status) {
         this.id = id;
         this.name = name;
         this.issue = issue;
         this.priority = priority;
         this.status = status;
 
-        if (id >= nextId)
-        {
+        // This part prevents duplicate IDs.
+        if (id >= nextId) {
             nextId = id + 1;
         }
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public String getPriority()
-    {
+    public String getPriority() {
         return priority;
     }
 

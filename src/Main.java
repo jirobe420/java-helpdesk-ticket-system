@@ -11,6 +11,8 @@ public class Main {
 
         boolean running = true;
 
+
+        // Keep displaying the menu until the user chooses Exit
         while (running) {
 
             showMenu();
@@ -26,6 +28,7 @@ public class Main {
                 continue;
             }
 
+            //Run the operation selected from the main menu
             if (choice == 1) {
                 String name = readNonEmptyLine(scanner, "Enter your name: ");
 
@@ -66,7 +69,7 @@ public class Main {
 
                 ticketManager.closeTicket(idToClose);
             } else if (choice == 4) {
-                System.out.println("Enter the ticket ID to search: ");
+                System.out.print("Enter the ticket ID to search: ");
 
                 try {
                     int idToSearch = Integer.parseInt(scanner.nextLine());
@@ -79,7 +82,7 @@ public class Main {
                 System.out.println("\n1. View open tickets");
                 System.out.println("2. View closed tickets");
                 System.out.println("3. Filter by priority");
-                System.out.println("Choose a filter: ");
+                System.out.print("Choose a filter: ");
 
                 String filterChoice = scanner.nextLine();
 
@@ -90,7 +93,7 @@ public class Main {
                     ticketManager.displayTicketByStatus("Closed");
 
                 } else if (filterChoice.equals("3")) {
-                    System.out.println("Enter priority (Low/Meidum/High): ");
+                    System.out.print("Enter priority (Low/Meidum/High): ");
                     String priority = scanner.nextLine();
 
                     if (priority.equalsIgnoreCase("Low")
@@ -116,7 +119,7 @@ public class Main {
                     String confirmation = scanner.nextLine();
 
                     if (confirmation.equalsIgnoreCase("yes")) {
-                        ticketManager.deleteTicket((idToDelete));
+                        ticketManager.deleteTicket(idToDelete);
                     } else {
                         System.out.println("Deletion cancelled.");
                     }
@@ -159,6 +162,7 @@ public class Main {
 
     }
 
+    // Keep asking until the user enters non empty text
     public static String readNonEmptyLine(Scanner scanner, String message) {
         while (true) {
             System.out.print(message);
