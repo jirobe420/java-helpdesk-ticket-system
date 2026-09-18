@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class TicketTest {
 
@@ -47,7 +48,7 @@ public class TicketTest {
         ticket.close();
         boolean result = ticket.close();
 
-        assertEquals(false, result);
+        assertFalse(result);
     }
 
     @Test
@@ -88,5 +89,34 @@ public class TicketTest {
         assertEquals(firstTicket.getId() + 1, secondTicket.getId());
 
     }
+
+    @Test
+
+        void invalidPriorityShouldThrowException()
+    {
+        assertThrows(
+
+                IllegalArgumentException.class,() -> new Ticket(
+
+                        "Pavlos",
+                        "Internet problem",
+                        "Urgent"
+                )
+        );
+    }
+
+    @Test
+    void nullPriorityShouldThrowException()
+    {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Ticket(
+                        "Pavlos",
+                        "Internet problem",
+                        null
+                )
+        );
+    }
+
 }
 

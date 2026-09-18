@@ -13,6 +13,17 @@ public class Ticket {
 
     public Ticket(String name, String issue, String priority) {
 
+        if (priority == null
+                || (!priority.equalsIgnoreCase("Low")
+                && !priority.equalsIgnoreCase("Medium")
+                && !priority.equalsIgnoreCase("High")))
+        {
+            throw new IllegalArgumentException(
+                    "Priority must be Low, Medium, or High."
+            );
+        }
+
+
         this.status = "Open";
         this.id = nextId;
         nextId++;
@@ -22,7 +33,8 @@ public class Ticket {
         this.issue = issue;
 
         // Converts "HIGH", "high", or "hIgH" into "High"
-        this.priority = priority.substring(0, 1).toUpperCase() + priority.substring(1).toLowerCase();
+        this.priority = priority.substring(0, 1).toUpperCase()
+                + priority.substring(1).toLowerCase();
 
 
     }
