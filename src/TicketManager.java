@@ -106,17 +106,26 @@ public class TicketManager {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|");
+                String[] parts = line.split("\\|", -1);
 
-                if (parts.length != 5) {
+                if (parts.length < 5) {
                     continue;
                 }
 
                 int id = Integer.parseInt(parts[0]);
                 String name = parts[1];
-                String issue = parts[2];
-                String priority = parts[3];
-                String status = parts[4];
+
+                StringBuilder issueBuilder = new StringBuilder(parts[2]);
+                for ( int i = 3; i < parts.length - 2; i++)
+                {
+                    issueBuilder.append("|").append(parts[i]);
+                }
+
+                String issue = issueBuilder.toString();
+                String priority = parts[parts.length - 2];
+                String status = parts[parts.length - 1];
+
+
 
                 Ticket ticket = new Ticket(id, name, issue, priority, status);
 
