@@ -13,10 +13,7 @@ public class Ticket {
 
     public Ticket(String name, String issue, String priority) {
 
-        if (priority == null
-                || (!priority.equalsIgnoreCase("Low")
-                && !priority.equalsIgnoreCase("Medium")
-                && !priority.equalsIgnoreCase("High")))
+        if (!isValidPriority(priority))
         {
             throw new IllegalArgumentException(
                     "Priority must be Low, Medium, or High."
@@ -87,6 +84,14 @@ public class Ticket {
 
     public String getPriority() {
         return priority;
+    }
+
+    public static boolean isValidPriority(String priority)
+    {
+        return priority !=null
+                && (priority.equalsIgnoreCase("Low")
+                ||  priority.equalsIgnoreCase("Medium")
+                ||  priority.equalsIgnoreCase("High"));
     }
 
 }

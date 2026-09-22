@@ -40,11 +40,11 @@ public class Main {
                     System.out.print("Enter priority (Low/Medium/High): ");
                     priority = scanner.nextLine();
 
-                    if (priority.equalsIgnoreCase("Low") || priority.equalsIgnoreCase("Medium")
-                            || priority.equalsIgnoreCase("High")) {
+                    if (Ticket.isValidPriority(priority)) {
                         break;
                     }
-                    System.out.println("Invalid priority. Please enter Low, Medium, or High");
+                    System.out.println(
+                            "Invalid priority. Please enter Low, Medium, or High");
                 }
 
                 Ticket ticket = new Ticket(name, issue, priority);
@@ -93,13 +93,10 @@ public class Main {
                     ticketManager.displayTicketByStatus("Closed");
 
                 } else if (filterChoice.equals("3")) {
-                    System.out.print("Enter priority (Low/Meidum/High): ");
+                    System.out.print("Enter priority (Low/Medium/High): ");
                     String priority = scanner.nextLine();
 
-                    if (priority.equalsIgnoreCase("Low")
-                            || priority.equalsIgnoreCase("Medium")
-                            || priority.equalsIgnoreCase("High")) {
-
+                    if (Ticket.isValidPriority(priority)){
                         ticketManager.displayTicketsByPriority(priority);
                     } else {
                         System.out.println("Invalid priority.");
@@ -176,6 +173,7 @@ public class Main {
 
         }
     }
+
 
 
 }
