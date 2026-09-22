@@ -96,7 +96,7 @@ public class Main {
                     System.out.print("Enter priority (Low/Medium/High): ");
                     String priority = scanner.nextLine();
 
-                    if (Ticket.isValidPriority(priority)){
+                    if (Ticket.isValidPriority(priority)) {
                         ticketManager.displayTicketsByPriority(priority);
                     } else {
                         System.out.println("Invalid priority.");
@@ -126,6 +126,17 @@ public class Main {
 
 
             } else if (choice == 7) {
+                System.out.print("Enter the ticket ID to reopen: ");
+
+                try{
+                    int idToReopen = Integer.parseInt(scanner.nextLine());
+                    ticketManager.reopenTicket(idToReopen);
+                }catch (NumberFormatException e)
+                {
+                    System.out.println("Invalid ID. Please enter a number.");
+                }
+
+            }else if (choice == 8) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
@@ -154,7 +165,8 @@ public class Main {
         System.out.println("4. Search for a ticket");
         System.out.println("5. Filter tickets");
         System.out.println("6. Delete a ticket");
-        System.out.println("7. Exit");
+        System.out.println("7. Reopen a ticket");
+        System.out.println("8. Exit");
 
 
     }

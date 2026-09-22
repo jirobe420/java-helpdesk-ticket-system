@@ -42,6 +42,19 @@ public class TicketManager {
         }
     }
 
+    public void reopenTicket(int id){
+        Ticket ticket = findTicketById(id);
+
+        if (ticket == null){
+            System.out.println("Ticket ID not found.");
+        }else if (ticket.reopen()){
+            saveTicketsToFile();
+            System.out.println("Ticket " + id + " reopened successfully.");
+        }else{
+            System.out.println("Ticket " + id + " is already open.");
+        }
+    }
+
     public void deleteTicket(int id) {
         Ticket ticket = findTicketById(id);
 

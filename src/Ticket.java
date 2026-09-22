@@ -54,6 +54,17 @@ public class Ticket {
         return true;
     }
 
+    public boolean reopen()
+    {
+        if (status.equals("Open"))
+        {
+            return false;
+        }
+
+        status = "Open";
+        return true;
+    }
+
     public void display() {
         System.out.println("\n--- TICKET DETAILS ---");
         System.out.println("Ticket ID: " + id);

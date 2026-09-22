@@ -118,5 +118,22 @@ public class TicketTest {
         );
     }
 
+    @Test
+    void reopeningClosedTicketShouldChangeStatusToOpen(){
+
+        Ticket ticket = new Ticket(
+                "Pavlos",
+                "Internet problem returned",
+                "High"
+        );
+
+        ticket.close();
+        boolean result = ticket.reopen();
+
+        assertTrue(result);
+        assertEquals("Open", ticket.getStatus());
+
+    }
+
 }
 
