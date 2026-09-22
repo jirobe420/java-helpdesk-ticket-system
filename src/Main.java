@@ -136,7 +136,12 @@ public class Main {
                     System.out.println("Invalid ID. Please enter a number.");
                 }
 
-            }else if (choice == 8) {
+            }else if (choice == 8 )
+            {
+                ticketManager.displayStatistics();
+            }
+
+            else if (choice == 9) {
                 running = false;
                 System.out.println("Goodbye!");
             } else {
@@ -166,7 +171,8 @@ public class Main {
         System.out.println("5. Filter tickets");
         System.out.println("6. Delete a ticket");
         System.out.println("7. Reopen a ticket");
-        System.out.println("8. Exit");
+        System.out.println("8. View statistics");
+        System.out.println("9. Exit");
 
 
     }

@@ -1,3 +1,5 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -182,6 +184,42 @@ public class TicketManager {
             System.out.println("No " + priority + " priority tickets found.");
         }
 
+    }
+
+    public void displayStatistics()
+    {
+        int openCount = 0;
+        int closedCount = 0;
+        int lowCount = 0;
+        int mediumCount = 0;
+        int highCount = 0;
+
+        for (Ticket ticket : tickets)
+        {
+            if (ticket.getStatus().equalsIgnoreCase("Open")){
+                openCount++;
+            }else if (ticket.getStatus().equalsIgnoreCase("Closed")){
+                closedCount++;
+            }
+
+            if(ticket.getPriority().equalsIgnoreCase("Low"))
+            {
+                lowCount++;
+            }else if (ticket.getPriority().equalsIgnoreCase("Medium")){
+                mediumCount++;
+            }else if (ticket.getPriority().equalsIgnoreCase("High")){
+                highCount++;
+            }
+        }
+
+        System.out.println("\n--- TICKET STATISTICS ---");
+        System.out.println("Total tickets: " + tickets.size());
+        System.out.println("Open tickets: " + openCount);
+        System.out.println("Closed tickets: " + closedCount);
+        System.out.println("Low priority: " + lowCount);
+        System.out.println("Medium priority: " + mediumCount);
+        System.out.println("High priority " + highCount);
+        System.out.println("-------------------------");
     }
 
 
